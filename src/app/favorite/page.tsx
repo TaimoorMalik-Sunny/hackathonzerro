@@ -1,38 +1,38 @@
 import { CldImage } from 'next-cloudinary'
-import Upload_button from './upload_button'
+
 import cloudinary from "cloudinary"
-import CloudinaryImage from './cloudinary_images'
+import CloudinaryImage from '../gallary/cloudinary_images'
+import { SearchResult } from '../gallary/page'
+import { ForceRefresh } from '@/components/force_refresh'
 
-export type SearchResult = {
-  public_id: string;
-  tags:string[]
-}
 
-export default async function GallaryPage(){
+
+export default async function FavoritePage(){
 
   const results = await cloudinary.v2.search
-  .expression("resource_type:image")
+  .expression("resource_type:image AND tags=favorite")
   .sort_by('created_at','desc')
   .max_results(30)
   .with_field('tags')
   .execute() as {resources:SearchResult[]}
 
-  console.log(results, results)
+ 
    
   
 
   return(
     <section>
+      <ForceRefresh/>
       <div className="flex flex-col gap-8">
         <div className="flex justify-between">
-        <h1 className="text-4xl font-bold" >Gallery</h1>
-       <Upload_button/>
+        <h1 className="text-4xl font-bold" >Favorite Images</h1>
+      
        </div>
       <div className="grid grid-cols-4 gap-4 ">
        {results.resources.map(result=>(
        
           <CloudinaryImage
-          path="/gallary"
+          path="/favorite"
           key={result.public_id}
          width="400"
           height="300"
