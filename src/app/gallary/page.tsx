@@ -1,7 +1,9 @@
-import { CldImage } from 'next-cloudinary'
+
 import Upload_button from './upload_button'
 import cloudinary from "cloudinary"
-import CloudinaryImage from './cloudinary_images'
+import CloudinaryImage from '../../components/cloudinary_images'
+import { ImageGrid } from '@/components/image-grid'
+import GallaryGrid from './gallary-grid'
 
 export type SearchResult = {
   public_id: string;
@@ -17,10 +19,11 @@ export default async function GallaryPage(){
   .with_field('tags')
   .execute() as {resources:SearchResult[]}
 
-  console.log(results, results)
-   
   
 
+ 
+  
+  
   return(
     <section>
       <div className="flex flex-col gap-8">
@@ -28,19 +31,9 @@ export default async function GallaryPage(){
         <h1 className="text-4xl font-bold" >Gallery</h1>
        <Upload_button/>
        </div>
-      <div className="grid grid-cols-4 gap-4 ">
-       {results.resources.map(result=>(
-       
-          <CloudinaryImage
-          path="/gallary"
-          key={result.public_id}
-         width="400"
-          height="300"
-          imageData={result}
-          alt="an image somthing "
-          />
-        ))}
-       </div>
+
+     <GallaryGrid
+     images = {results.resources}/>  
       </div>
     </section>
   )

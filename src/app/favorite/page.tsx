@@ -1,9 +1,10 @@
 import { CldImage } from 'next-cloudinary'
 
 import cloudinary from "cloudinary"
-import CloudinaryImage from '../gallary/cloudinary_images'
+import CloudinaryImage from '../../components/cloudinary_images'
 import { SearchResult } from '../gallary/page'
 import { ForceRefresh } from '@/components/force_refresh'
+import FavoriteList from './favorites_list'
 
 
 
@@ -28,19 +29,9 @@ export default async function FavoritePage(){
         <h1 className="text-4xl font-bold" >Favorite Images</h1>
       
        </div>
-      <div className="grid grid-cols-4 gap-4 ">
-       {results.resources.map(result=>(
-       
-          <CloudinaryImage
-          path="/favorite"
-          key={result.public_id}
-         width="400"
-          height="300"
-          imageData={result}
-          alt="an image somthing "
-          />
-        ))}
-       </div>
+
+       <FavoriteList initialResources={results.resources}/>
+ 
       </div>
     </section>
   )

@@ -1,10 +1,9 @@
 "use server"
 import cloudinary from 'cloudinary'
-import { revalidatePath } from 'next/cache'
+
 export async function SetAsFavoriteAction(
     publicId:string, 
-    IsFavorit:boolean,
-    path:string
+    IsFavorit:boolean
     ){
 
         if (IsFavorit){
@@ -17,8 +16,6 @@ export async function SetAsFavoriteAction(
             await  cloudinary.v2.uploader.remove_tag("favorite",[publicId]);
 
         }
-        await new Promise((resolve)=>setTimeout(resolve, 1500));
-        revalidatePath(path);
-
+       
 
 }
