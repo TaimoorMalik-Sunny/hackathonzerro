@@ -58,7 +58,7 @@ return(
        }}  
      className=" absolute top-2 left-2 hover:text-red-300 cursor-pointer"/>
     }
-    <ImageMenu/>
+    <ImageMenu image={imageData}/>
      </div>
      )
 }

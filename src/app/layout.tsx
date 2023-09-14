@@ -34,10 +34,11 @@ function Sidemenu(){
               Gallary
               </Link>
             </Button>
-            <Button variant="ghost" className="w-full justify-start flex gap-4">
-       
+            <Button asChild variant="ghost" className="w-full justify-start flex gap-4">
+              <Link href={"/albums"}>
               <AlbumsIcon/>
               Albums
+              </Link>
             </Button>
             <Button asChild variant="ghost" 
             className="w-full justify-start flex gap-4">

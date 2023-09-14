@@ -1,4 +1,4 @@
-import { FolderPlus
+import { FolderPlus, Pencil
   } from "lucide-react"
   
   import { Button } from "@/components/ui/button"
@@ -17,8 +17,13 @@ import { FolderPlus
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import { Menu } from "./Icons/menu"
+import { AddToAlbumDialog } from "./add-to-album-dailog"
+import { SearchResult } from "@/app/gallary/page"
+import { useState } from "react"
+import Link from "next/link"
   
-  export function ImageMenu() {
+  export function ImageMenu({image }: {image : SearchResult}) {
+    const [open, setOpen] = useState(false);
     return (
         <div className="  absolute top-2 right-2 ">
       <DropdownMenu>
@@ -29,11 +34,15 @@ import { Menu } from "./Icons/menu"
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className=" w-40">
-            <DropdownMenuItem>
-              <FolderPlus className="mr-2 h-4 w-4" />
-              <span>Add to Album</span>
-              
-            </DropdownMenuItem>
+            <DropdownMenuItem asChild onClick={()=> setOpen(false)}>
+            <AddToAlbumDialog  image = {image}/>
+           </DropdownMenuItem>
+           <DropdownMenuItem asChild onClick={()=> setOpen(false)}>
+            <Link href={`/edit?publicId=${encodeURIComponent(image.public_id)}`}>
+              <Pencil className=" ml-1 mr-3 w-4 h-4"/>
+              Edit
+              </Link>
+           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       </div>
