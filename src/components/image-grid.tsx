@@ -24,6 +24,7 @@ export function ImageGrid({
         {[getColumns(0),getColumns(1),getColumns(2),getColumns(3)].map(
          (column , idx) =>( 
          <div key={idx} className="flex flex-col gap-4">
+            {/* state pass karani hy  */}
          {column.map(getImage)}
         </div>
             )

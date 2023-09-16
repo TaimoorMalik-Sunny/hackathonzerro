@@ -38,7 +38,7 @@ import Link from "next/link"
             <AddToAlbumDialog  image = {image}/>
            </DropdownMenuItem>
            <DropdownMenuItem asChild onClick={()=> setOpen(false)}>
-            <Link href={`/edit?publicId=${encodeURIComponent(image.public_id)}`}>
+            <Link className=" cursor-pointer" href={`/edit?publicId=${encodeURIComponent(image.public_id)}`}>
               <Pencil className=" ml-1 mr-3 w-4 h-4"/>
               Edit
               </Link>

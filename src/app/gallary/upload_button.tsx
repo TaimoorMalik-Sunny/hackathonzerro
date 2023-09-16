@@ -1,13 +1,12 @@
-
 'use client'
 import { CldUploadButton } from "next-cloudinary"
 import { UploadResult } from "../page"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
-
- const upload_button = () => {
- const router = useRouter();
-
+ 
+ function upload_button ()  {
+ const Router = useRouter();
+  
   return (
    
 
@@ -24,8 +23,10 @@ import { useRouter } from "next/navigation"
   onUpload = {(result: UploadResult)=>{
   // setImageId(result.info.public_id)
   setTimeout(()=>{
-    console.log("refresh page")
-    router.refresh();
+    // console.log("refresh page")
+    // Router.refresh();
+    console.log("====result====")
+    console.log(result)
   },1000);
   
   }}

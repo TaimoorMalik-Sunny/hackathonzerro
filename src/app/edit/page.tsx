@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { CldImage } from "next-cloudinary";
 import { useState } from "react";
 
@@ -11,7 +12,7 @@ export default function EditPage({searchParams:{publicId}}:
         }
     }){
     const [transformation , settransformation] = useState<undefined|"generative-fill"|"blur"|"grayscale"|"pixelate"|"removeBackground">()
-
+    const [tagPromp, setTagPromp] = useState("");
     return (
     <section>
     <div className="flex flex-col gap-8">
@@ -22,6 +23,11 @@ export default function EditPage({searchParams:{publicId}}:
      <div className="flex gap-4">
      <Button variant="ghost" onClick={()=>settransformation(undefined)} >Clear All</Button>
      <Button onClick={()=>settransformation("generative-fill")} >Generative fill</Button>
+     <Input className=" w-32"
+            onChange={(e)=> setTagPromp(e.currentTarget.value)}  
+            id="album-name" 
+            value={tagPromp} 
+             />
      <Button onClick={()=>settransformation("blur")} >Apply blur</Button>
      <Button onClick={()=>settransformation("grayscale")} >Convert to gray</Button>
      <Button onClick={()=>settransformation("pixelate")} >Convert to pixelate</Button>
@@ -31,13 +37,19 @@ export default function EditPage({searchParams:{publicId}}:
      <CldImage src={publicId} width="300" height="200" alt="edit images"/>
   {
     transformation === 'generative-fill' && 
-    <CldImage src={publicId} width="1200" height="1400" alt="edit images"
+    <CldImage 
+    src={publicId} 
+    width="2400" 
+    height="1200" 
+    alt="edit images"
     crop="pad"
-    fillBackground
+    fillBackground={
+     { prompt: tagPromp}
+    }
     />
   }
   {
-    transformation === 'grayscale' && 
+    transformation === "grayscale" && 
     <CldImage 
     src={publicId} 
     width="1200" 
@@ -48,7 +60,7 @@ export default function EditPage({searchParams:{publicId}}:
     />
   }
     {
-    transformation === 'blur' && 
+    transformation === "blur"&& 
     <CldImage 
     src={publicId} 
     width="1200" 
@@ -59,7 +71,7 @@ export default function EditPage({searchParams:{publicId}}:
     />
   }
   {
-    transformation === 'pixelate' && 
+    transformation === "pixelate" && 
     <CldImage 
     src={publicId} 
     width="1200" 

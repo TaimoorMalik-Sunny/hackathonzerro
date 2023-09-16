@@ -23,6 +23,8 @@ export default async function GallaryGrid({images}:{images: SearchResult[]}){
              imageData={imageData}
              alt="an image somthing "/>)
        }}/>
+
+       
   
    
   )
